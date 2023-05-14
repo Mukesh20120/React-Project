@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
 import { Link } from "react-router-dom";
 import Oauth from "../Components/Oauth";
-export default function SignIn() {
+export default function SignUp() {
   const [formData, setFormData] = useState({
+    name: "",
     email: "",
     password: "",
   });
   const [showPassword, setShowPassword] = useState(false);
-  const { email, password } = formData;
+  const {name, email, password } = formData;
   function updateEmail(e) {
     setFormData((prevState) => ({
       ...prevState,
@@ -17,7 +18,7 @@ export default function SignIn() {
   }
   return (
     <section>
-      <h1 className="text-3xl text-center mt-6 font-bold uppercase">Sign In</h1>
+      <h1 className="text-3xl text-center mt-6 font-bold uppercase">Sign Up</h1>
       <div className="flex justify-center flex-wrap px-6 py-12 mx-auto items-center max-w-6xl">
         <div className="md:w-[67%] lg:w-[50%] mb-12 md:mb-6">
           <img
@@ -28,6 +29,14 @@ export default function SignIn() {
         </div>
         <div className="w-full md:w-[67%] lg:w-[40%] lg:ml-20">
           <form className="mb-6">
+            <input
+              className="w-full px-4 py-2 text-xl text-gray-500 bg-white border-grey-300 rounded transition ease-in-out mb-6"
+              type="text"
+              id="name"
+              placeholder="Full Name"
+              value={name}
+              onChange={updateEmail}
+            />
             <input
               className="w-full px-4 py-2 text-xl text-gray-500 bg-white border-grey-300 rounded transition ease-in-out mb-6"
               type="email"
@@ -59,12 +68,12 @@ export default function SignIn() {
             </div>
             <div className="flex justify-between whitespace-nowrap text-sm sm:text-lg mb-6">
               <p>
-                Don't have account?
+                Have an account?
                 <Link
-                  to="/signUp"
+                  to="/signIn"
                   className="text-red-600 hover:text-red-700 transition duration-200 ease-in-out "
                 >
-                  Register
+                  Sign In
                 </Link>
               </p>
               <p>
@@ -80,7 +89,7 @@ export default function SignIn() {
               type="submit"
               className="w-full bg-blue-600 text-white text-sm px-7 py-3 font-medium uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800"
             >
-              Sign In
+              Sign Up
             </button>
             <div className="flex my-4 items-center before:border-t before:border-gray-500 before:flex-1 after:border-t after:border-gray-500 after:flex-1">
               <p className=" text-center font-semibold mx-4">OR</p>
