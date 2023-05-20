@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { AiFillEyeInvisible, AiFillEye } from "react-icons/ai";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Oauth from "../Components/Oauth";
+import { toast } from "react-toastify";
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 export default function SignIn() {
   const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
+  const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const { email, password } = formData;
   function updateEmail(e) {
@@ -14,6 +17,18 @@ export default function SignIn() {
       ...prevState,
       [e.target.id]: e.target.value,
     }));
+  }
+  async function onSubmit(e){
+    e.preventDefault();
+    try {
+      const auth = getAuth();
+      const credential = await signInWithEmailAndPassword(auth,email,password);
+      if(credential.user){
+          navigate("/"); 
+      }
+    } catch (error) {
+      toast.error("Wrong credentials")
+    }
   }
   return (
     <section>
@@ -78,6 +93,7 @@ export default function SignIn() {
             </div>
             <button
               type="submit"
+              onClick={onSubmit}
               className="w-full bg-blue-600 text-white text-sm px-7 py-3 font-medium uppercase rounded shadow-md hover:bg-blue-700 transition duration-150 ease-in-out hover:shadow-lg active:bg-blue-800"
             >
               Sign In
