@@ -8,7 +8,7 @@ function PrivateRoute() {
         return <h1>Loading...</h1>
     return (
         <>
-          {loggedIn?<Outlet/>: <Navigate to={"/profile"}/>}
+          {loggedIn?<Outlet/>: <Navigate to={"/signIn"}/>}
         </>
     )
 }
